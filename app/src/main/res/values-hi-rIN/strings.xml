@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <resources>
+        <string name="app_name">किया</string>
+        <string name="hello_msg">नमसकार</string>
+        <string name="login_button_text">लौगिन</string>
+        <string name="button_text">मै बटन हृ</string>
+
+        <string name="login">लौगिन</string>
+        <string name="loginname">लॉगिन नाम</string>
+        <string name="password">पासवरड</string>
+        <string name="dialog_message">आप गतिविधि को समाप्त करना चाहते हैं</string>
+        <string name="dialog_title">समाप्त गतिविधि</string>
+        <string name="ok">ठीक</string>
+        <string name="cancel">रद्द करना</string>
+        <string name="what_does_this_do">यह क्या करता है?</string>
+        <string name="checkbox">CheckBox</string>
+        <string name="radiobutton">RadioButton</string>
+        <string name="switchon">स्विच चालू है</string>
+        <string name="switchoff">विच बंद है</string>
+        <string name="response">यहाँ मेरी प्रतिक्रिया है</string>
+    </resources>
+
