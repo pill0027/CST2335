@@ -21,6 +21,17 @@
         android:layout_height="wrap_content"
         android:text="@string/button_text"
         tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="283dp" />
+        tools:layout_editor_absoluteY="283dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_chat"
+        tools:layout_editor_absoluteX="148dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="120dp"
+        tools:ignore="MissingConstraints"/>
 
 </android.support.constraint.ConstraintLayout>

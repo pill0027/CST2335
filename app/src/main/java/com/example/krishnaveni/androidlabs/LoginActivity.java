@@ -29,20 +29,16 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         loginText= findViewById(R.id.loginbox);
         loginText.setText(emailID);
         b1.setOnClickListener(this);
-
-
     }
     @Override
     protected void onStart() {
         super.onStart();
         Log.i(ACTIVITY_NAME, "In onStart()");
-
     }
     @Override
     protected void onPause() {
         super.onPause();
         Log.i(ACTIVITY_NAME, "In onPause()");
-
     }
 
     @Override

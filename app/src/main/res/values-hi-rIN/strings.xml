@@ -19,5 +19,7 @@
         <string name="switchon">स्विच चालू है</string>
         <string name="switchoff">विच बंद है</string>
         <string name="response">यहाँ मेरी प्रतिक्रिया है</string>
-    </resources>
+        <string name="send_button">भेजें बटन</string>
+        <string name="start_chat">चैट भेजें</string>
+</resources>
 
