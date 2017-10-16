@@ -89,9 +89,6 @@ public class StartActivity extends Activity implements View.OnClickListener {
         }
 
     }
-
-
-
 }
 
 
