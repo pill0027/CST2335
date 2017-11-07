@@ -3,8 +3,6 @@
     <string name="hello_msg">Hello world</string>
     <string name="login_button_text">Login Button</string>
     <string name="button_text">I m a button</string>
-
-
     <string name="login">Login</string>
     <string name="loginname">Login name</string>
     <string name="password">Password</string>
@@ -20,6 +18,5 @@
     <string name="response">Here is my response</string>
     <string name="start_chat">Start Chart</string>
     <string name="send_button">Send Button</string>
-
-
+    <string name="start_weather">WeatherForecast</string>
 </resources>

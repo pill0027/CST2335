@@ -20,8 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_text"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="283dp"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="7dp"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -29,9 +29,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_chat"
-        tools:layout_editor_absoluteX="148dp"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="120dp"
-        tools:ignore="MissingConstraints"/>
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints"
+        android:layout_marginRight="4dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weather"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 
 </android.support.constraint.ConstraintLayout>

@@ -20,6 +20,9 @@ public class StartActivity extends Activity implements View.OnClickListener {
         b1.setOnClickListener(this);
        Button b2=findViewById(R.id.button2);
        b2.setOnClickListener(this);
+        Button b3=findViewById(R.id.button3);
+        b3.setOnClickListener(this);
+
 
     }
     @Override
@@ -81,9 +84,11 @@ public class StartActivity extends Activity implements View.OnClickListener {
                 Log.i(ACTIVITY_NAME, "User clicked Start Chat");
                 Intent chatintent = new Intent(StartActivity.this, ChatWindow.class);
                 startActivity(chatintent);
-
                 break;
-
+            case R.id.button3:
+                Log.i(ACTIVITY_NAME, "User clicked WeatherForcast");
+                Intent Weatherintent = new Intent(this, WeatherForecast.class);
+                startActivity(Weatherintent);
             default:
                 break;
         }
