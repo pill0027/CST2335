@@ -19,4 +19,5 @@
     <string name="start_chat">Start Chart</string>
     <string name="send_button">Send Button</string>
     <string name="start_weather">WeatherForecast</string>
+    <string name="title_activity_test_toolbar">TestToolbar</string>
 </resources>

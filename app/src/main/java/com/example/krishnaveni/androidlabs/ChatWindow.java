@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
-public class ChatWindow extends Activity implements View.OnClickListener {
+public class ChatWindow extends Activity implements View.OnClickListener,AdapterView.OnItemClickListener {
     private Cursor cursor;
     private ListView listView;
     private FrameLayout framelayout;
@@ -36,6 +36,7 @@ public class ChatWindow extends Activity implements View.OnClickListener {
     private static String ACTIVITY_NAME="ChatWindow";
     ChatDatabaseHelper chDbHelper=new ChatDatabaseHelper(this);
     private SQLiteDatabase db;
+    private MessageFragment mFr=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(ACTIVITY_NAME, "In onCreate method");
@@ -46,30 +47,7 @@ public class ChatWindow extends Activity implements View.OnClickListener {
         if(framelayout!=null){
             isTablet=true;
         }
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                long msgId = messageAdapter.getItemId(position);
-                String msg=messageAdapter.getItemText(position);
-                Bundle b = new Bundle();
-                b.putLong("ID",msgId);
-                b.putString("MSG",msg);
-               if(!isTablet) {
-                   Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
-                   intent.putExtras(b);
-                   startActivityForResult(intent, 200, b);
-               }
-               else{
-                   MessageFragment mFr=new MessageFragment();
-                   mFr.setArguments(b);
-                   FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                   transaction.add(R.id.frameChat,mFr);
-                   transaction.commit();
-
-               }
-            }
-        });
+        listView.setOnItemClickListener(this);
         textInput=findViewById(R.id.editText);
         sendButton=findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
@@ -106,6 +84,38 @@ public class ChatWindow extends Activity implements View.OnClickListener {
             textInput.setText("");
             }
         }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+        long msgId = messageAdapter.getItemId(position);
+                String msg=messageAdapter.getItemText(position);
+                Bundle b = new Bundle();
+                b.putLong("ID",msgId);
+                b.putString("MSG",msg);
+                if(!isTablet) {
+                    Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
+                    intent.putExtras(b);
+                    startActivityForResult(intent, 200, b);
+                }
+                else{
+
+                   mFr= (MessageFragment)this.getFragmentManager().findFragmentById(R.id.frameChat);
+                   if(mFr!=null){
+                       FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                       transaction.remove(mFr);
+                       transaction.commit();
+                   }
+                   mFr = new MessageFragment();
+                   FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                   transaction.add(R.id.frameChat,mFr);
+                    transaction.commit();
+                    mFr.setArguments(b);
+                    mFr.setChatWindow(this);
+                }
+
+    }
+
     private class ChatAdapter extends ArrayAdapter<ArrayList> {
         private ArrayList dataSet;
         public long getItemId(int position){
@@ -149,20 +159,30 @@ public class ChatWindow extends Activity implements View.OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==200){
-            db= chDbHelper.getWritableDatabase();
-            long id=data.getExtras().getLong("ID");
-            String message=data.getExtras().getString("MSG");
-            if(message==null)
-            {
-                message="";
-            }
-            db.delete(chDbHelper.TABLE_NAME, chDbHelper.KEY_ID + " = ?",
-                    new String[]{Long.toString(id)} );
-            db.close();
-            al.remove(message);
-            messageAdapter=new ChatAdapter( this,R.layout.activity_list_items,al );
-            listView.setAdapter(messageAdapter);
-            messageAdapter.notifyDataSetChanged();
+            deleteMessage(data);
+        }
+    }
+
+    public void deleteMessage(Intent data)
+    {
+       db= chDbHelper.getWritableDatabase();
+        long id=data.getExtras().getLong("ID");
+        String message=data.getExtras().getString("MSG");
+        if(message==null)
+        {
+            message="";
+        }
+        db.delete(chDbHelper.TABLE_NAME, chDbHelper.KEY_ID + " = ?",
+                new String[]{Long.toString(id)} );
+        db.close();
+        al.remove(message);
+        messageAdapter=new ChatAdapter( this,R.layout.activity_list_items,al );
+        listView.setAdapter(messageAdapter);
+        messageAdapter.notifyDataSetChanged();
+        if(mFr!=null){
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.remove(mFr);
+            transaction.commit();
         }
     }
 }

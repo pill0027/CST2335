@@ -21,6 +21,11 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
     private String msg;
     private TextView idText;
     private TextView msgText;
+    private ChatWindow chat=null;
+
+    public void setChatWindow(ChatWindow chat){
+        this.chat=chat;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,8 +65,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
         Intent intent=new Intent();
         intent.putExtra("ID",id);
         intent.putExtra("MSG",msg);
-        getActivity().setResult(200,intent);
-        getActivity().finish();
+        if(chat!=null){
+         chat.deleteMessage(intent);
+        }
+        else {
+            getActivity().setResult(200, intent);
+            getActivity().finish();
+        }
     }
 }
 

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 public class StartActivity extends Activity implements View.OnClickListener {
     protected static final String ACTIVITY_NAME = "StartActivity";
@@ -22,6 +23,8 @@ public class StartActivity extends Activity implements View.OnClickListener {
        b2.setOnClickListener(this);
         Button b3=findViewById(R.id.button3);
         b3.setOnClickListener(this);
+        Button b4=findViewById(R.id.button4);
+        b4.setOnClickListener(this);
 
 
     }
@@ -89,6 +92,10 @@ public class StartActivity extends Activity implements View.OnClickListener {
                 Log.i(ACTIVITY_NAME, "User clicked WeatherForcast");
                 Intent Weatherintent = new Intent(this, WeatherForecast.class);
                 startActivity(Weatherintent);
+            case R.id.button4:
+                Log.i(ACTIVITY_NAME, "User clicked Toolbar");
+                Intent toolbar = new Intent(this, TestToolbar.class);
+                startActivity(toolbar);
             default:
                 break;
         }
